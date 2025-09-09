@@ -1,6 +1,5 @@
 package LinkedList;
 
-// PIE
 
 class PetPeeve {
     String name;
@@ -10,7 +9,9 @@ class PetPeeve {
     }
 
     public void set(String name) {
-        if (name.contains(name))
+        if (name.contains(name)) {
+            
+        }
         this.name = name;
     }
 }
