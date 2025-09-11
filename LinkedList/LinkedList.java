@@ -22,7 +22,7 @@ public class LinkedList {
     private int length = 0;
 
     public LinkedList() {
-        
+
     }
 
     public void add(Object item) {
@@ -30,13 +30,11 @@ public class LinkedList {
         if (length == 0) {
             head = n;
             tail = n;
-        }
-        else {
+        } else {
             tail.next = n;
             n.prev = tail;
             tail = n;
         }
-
         length++;
     }
 
@@ -47,5 +45,8 @@ public class LinkedList {
     public static void main(String[] args) {
         LinkedList ll = new LinkedList();
         ll.add(78);
+        ll.add(32);
+        ll.add(-43);
+        ll.add(11);
     }
 }
