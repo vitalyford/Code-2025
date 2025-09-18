@@ -1,32 +1,56 @@
 package LinkedList;
 
-class Node {
-    Object item;
-    Node next;
-    Node prev;
+class Pokemon {
+    String name;
+    int age;
+
+    public Pokemon(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Pokemon)) {
+            return false;
+        }
+        Pokemon pObj = (Pokemon)obj;
+
+        return name.equals(pObj.name) && age == pObj.age;
+    }
+
+    public String toString() {
+        return name + " " + age + " y.o.";
+    }
+}
+
+class Node<F1> {
+    F1 item;
+    Node<F1> next;
+    Node<F1> prev;
 
     public Node() {
         item = null;
         next = prev = null;
     }
 
-    public Node(Object item) {
+    public Node(F1 item) {
         this.item = item;
         next = prev = null;
     }
 }
 
-public class LinkedList {
-    private Node head = null;
-    private Node tail = null;
+public class LinkedList<F1> {
+    private Node<F1> head = null;
+    private Node<F1> tail = null;
     private int length = 0;
 
     public LinkedList() {
 
     }
 
-    public void add(Object item) {
-        Node n = new Node(item);
+    public void add(F1 item) {
+        Node<F1> n = new Node<>(item);
         if (length == 0) {
             head = n;
             tail = n;
@@ -44,12 +68,12 @@ public class LinkedList {
      * @return the item of type Object based on the index
      * @throws IndexOutOfBounds if the index is less or greater/equal to length
      */
-    public Object get(int index) {
+    public F1 get(int index) {
         if (index < 0 || index >= length) {
             // index = index % length;
             throw new IndexOutOfBoundsException("Wrong index " + index + " for length " + length);
         }
-        Node curr = head;
+        Node<F1> curr = head;
         int searchingIndex = 0;
         while (searchingIndex != index) {
             curr = curr.next;
@@ -57,6 +81,15 @@ public class LinkedList {
         }
         return curr.item;
         // lets go
+    }
+
+    public boolean contains(F1 item) {
+        for (Node<F1> curr = head; curr != null; curr = curr.next) {
+            if (curr.item.equals(item)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /** 
@@ -67,8 +100,8 @@ public class LinkedList {
     * @param   obj  represents the object the user wants to remove
     * @return       position of the removed object
     */
-    public int remove(Object obj) {
-
+    public int remove(F1 obj) {
+        return 0;
     }
 
     /**
@@ -78,8 +111,8 @@ public class LinkedList {
     *                    to be removed
     * @return            the item that was removed
     */
-    public Object remove(int position) {
-
+    public F1 remove(int position) {
+        return null;
     }
 
     /**
@@ -89,7 +122,7 @@ public class LinkedList {
     * @param   position  represents the position of the object
     *                    to be added in the LinkedList
     */
-    public void add(Object obj, int position) {
+    public void add(F1 obj, int position) {
 
     }
 
@@ -98,11 +131,25 @@ public class LinkedList {
     }
 
     public static void main(String[] args) {
-        LinkedList ll = new LinkedList();
-        ll.add(78);
-        ll.add(32);
-        ll.add(-43);
-        ll.add(11);
+        LinkedList<Pokemon> ll = new LinkedList<>();
+
+        Pokemon p1 = new Pokemon("char", 45);
+        Pokemon p2 = new Pokemon("pika", 8993443);
+
+        Pokemon p3 = new Pokemon("char", 45);
+        
+        ll.add(p1);
+        ll.add(p2);
+        // ll.add(-43);
+        // ll.add(11);
+
+        int sum = 0;
+        for (int i = 0; i < ll.size(); i++) {
+            sum += ll.get(i).age;
+        }
+
+        System.out.println("Sum is " + sum);
+        System.out.println("Do we have " + p3 + " in the list? " + ll.contains(p3));
 
         try {
             System.out.println(ll.get(4874685));
