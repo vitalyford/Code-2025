@@ -8,6 +8,17 @@ public class Recursion {
         return num * factorial(num - 1);
     }
 
+    public static void hanoi(int n, String src, String dst, String spare) {
+        if (n == 1) {
+            System.out.println("Move from " + src + " to " + dst);
+        }
+        else {
+            hanoi(n - 1, src, spare, dst);
+            hanoi(1, src, dst, spare);
+            hanoi(n - 1, spare, dst, src);
+        }
+    }
+
     public static String backward(String input) {
         // return input.equals("") ? "" : backward(input.substring(1)) + input.charAt(0);
         if (input.equals("")) {
@@ -40,5 +51,7 @@ public class Recursion {
         System.out.println(factorial(5));
         System.out.println(backward("A Santa lived as a devil at NASA"));
         System.out.println(rabbitsFor(120));
+
+        hanoi(4, "A", "B", "C");
     }
 }
