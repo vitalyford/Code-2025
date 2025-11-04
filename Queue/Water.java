@@ -45,7 +45,7 @@ public class Water {
         possible.offer(start);
         boolean goUp = false;
 
-        ArrayList<Pair> visted = new ArrayList<>();
+        HashSet<Pair> visted = new HashSet<>();
         int count = 0;
 
         while (!(possible.isEmpty())) {
